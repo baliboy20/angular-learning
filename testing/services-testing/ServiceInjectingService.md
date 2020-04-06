@@ -1,8 +1,8 @@
 ## Using SpyOnService
 
-We can **inject** the sub-service into the service to be tested.
+We can *inject* the sub-service into the service to be tested.
 
-#### Injected Service and Main Service
+### Injected Service and Main Service
 ````
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class MainService {
 }
 ````
 
-#### Service Spec
+### Service Spec
 
 ```
 import {LoggerService, MainService} from './main.service';
