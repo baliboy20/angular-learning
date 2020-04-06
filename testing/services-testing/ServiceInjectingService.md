@@ -38,7 +38,6 @@ import {LoggerService, MainService} from './main.service';
 describe('MainService', () => {
   let service: MainService;
   let lg1: LoggerService  = null;
-  // let lg: LoggerService;
 
   beforeEach(async(
     () => {
@@ -57,12 +56,7 @@ describe('MainService', () => {
   ));
 
   it('should be created', () => {
-
-
     expect(lg1).toBeTruthy();
-    // spyOn(service, 'getName').and.returnValue('jackies');
-    // expect(service).toBeTruthy();
-
     expect(service.getName()).toEqual('I am a MainService');
     expect(service.loggerOfMain()).toEqual('Main: timmy');
   });
