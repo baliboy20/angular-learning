@@ -4,9 +4,7 @@ We can *inject* the sub-service into the service to be tested.
 
 ### Injected Service and Main Service
 ````
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root'})
 export class LoggerService {
 
   public getName() {
@@ -14,9 +12,7 @@ export class LoggerService {
   }
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root'})
 export class MainService {
 
   constructor(private logger: LoggerService) { }
