@@ -20,9 +20,11 @@ export class LoggerService {
 export class MainService {
 
   constructor(private logger: LoggerService) { }
+
  public getName() {
     return 'I am a MainService';
   }
+
   public loggerOfMain() {
     return `Main: ${this.logger.getName()}`;
   }
