@@ -9,12 +9,11 @@ We can *inject* the sub-service into the service to be tested.
 })
 export class LoggerService {
 
-  constructor() { }
   public getName() {
     return 'I am a LoggerService';
   }
-
 }
+
 @Injectable({
   providedIn: 'root'
 })
