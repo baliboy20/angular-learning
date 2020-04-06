@@ -31,14 +31,20 @@ export class MainService {
 ### Service Spec
 
 ```
-import {LoggerService, MainService} from './main.service';
+import {async, TestBed} from '@angular/core/testing';
 
-describe('MainService', () => {
+import {LoggerService, MainService} from './main.service';
+import {main} from '@angular/compiler-cli/src/main';
+
+describe('Using CreateSpy which uses actual services but overrides the return values', () => {
   let service: MainService;
-  let lg1: LoggerService  = null;
+  let lg1: LoggerService = null;
+  // let lg: LoggerService;
 
   beforeEach(async(
     () => {
+      // spyOnInst = jasmine.createSpyObj(['getName']);
+      // spyOnInst.and.returnValue('Freddy');
       TestBed.configureTestingModule({
         providers: [
           {provide: LoggerService, useClass: LoggerService},
@@ -47,7 +53,7 @@ describe('MainService', () => {
       }).compileComponents();
       service = TestBed.get('T1');
       lg1 = TestBed.get(LoggerService);
-      lg1.getName =  jasmine.createSpy('getName').and.returnValue('timmy');
+      lg1.getName = jasmine.createSpy('getName').and.returnValue('timmy');
     }
   ));
 
@@ -57,5 +63,31 @@ describe('MainService', () => {
     expect(service.loggerOfMain()).toEqual('Main: timmy');
   });
 });
+
+describe('Using createSpyObj creates a Mock service', () => {
+  let mainservice: MainService;
+  let mockLogger: LoggerService;
+  beforeEach(() => {
+    mockLogger = jasmine.createSpyObj('LoggerService', {getName: 'zippy'});
+    TestBed.configureTestingModule({
+      providers: [
+        {provide: LoggerService, useValue: mockLogger},
+        {provide: 'mainservice', useClass: MainService, deps: [LoggerService]}]
+    });
+    mainservice = TestBed.get('mainservice');
+  });
+
+  it('mocklogger should exist', () => {
+    expect(mockLogger).toBeTruthy();
+    const testval = mockLogger.getName();
+    expect(testval).toEqual('zippy', `should be ${testval}`);
+  });
+
+  it('mockLogger injected into the mainService and called', () => {
+    const testval = mainservice.loggerOfMain();
+    expect(testval).toEqual('Main: zippy');
+  });
+});
+
 
 ```
