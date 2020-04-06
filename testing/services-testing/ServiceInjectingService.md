@@ -41,8 +41,6 @@ describe('MainService', () => {
 
   beforeEach(async(
     () => {
-      // spyOnInst = jasmine.createSpyObj(['getName']);
-      // spyOnInst.and.returnValue('Freddy');
       TestBed.configureTestingModule({
         providers: [
           {provide: LoggerService, useClass: LoggerService},
